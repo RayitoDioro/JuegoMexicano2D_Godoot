@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6vcn81ofofsw"]
+
+[ext_resource type="Script" uid="uid://dusrh7ybi6qf3" path="res://collectible.gd" id="1_8orai"]
+[ext_resource type="Texture2D" uid="uid://ee11qybus2a2" path="res://art/flor.png" id="2_8orai"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8orai"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8orai")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yciwo"]
+radius = 320.0
+height = 960.0
+
+[node name="Collectible" type="Area2D"]
+visible = false
+script = ExtResource("1_8orai")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+sprite_frames = SubResource("SpriteFrames_8orai")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.05, 0.05)
+shape = SubResource("CapsuleShape2D_yciwo")
+debug_color = Color(9.62615e-08, 0.612676, 0.620102, 0.42)
+
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
